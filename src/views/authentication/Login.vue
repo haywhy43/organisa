@@ -123,4 +123,58 @@ export default {
     color: #fff !important;
     font-size: 12px;
 }
+
+@media screen and (max-width: 1200px) {
+    .right {
+        .v-card {
+            width: 80% !important;
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .inner_page {
+        width: 90% !important;
+    }
+    .right {
+        .v-card {
+            width: 90% !important;
+        }
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .inner_page {
+        width: 95% !important;
+        flex-wrap: wrap-reverse;
+
+        .left {
+            width: 90% !important;
+            margin: auto;
+
+            h2 {
+                font-size: 20px !important;
+            }
+
+            p {
+                margin-bottom: 10px;
+            }
+        }
+
+        .right {
+            width: 100% !important;
+            height: 100%;
+            margin-bottom: 20px;
+            margin-top: 100px;
+
+            .v-card {
+                margin: auto !important;
+
+                .container {
+                    padding: 35px 40px !important;
+                }
+            }
+        }
+    }
+}
 </style>
