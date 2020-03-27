@@ -27,7 +27,7 @@
                     :rules="confirmPasswordRules"
                 ></v-text-field>
 
-                <v-btn elevation="3" rounded @click="validate" :disabled="!valid">Proceed</v-btn>
+                <v-btn elevation="3" rounded @click="() => register(form)" :disabled="!valid">Proceed</v-btn>
             </v-form>
             <div>
                 <p>Already a member? <router-link to="/login">Login</router-link></p>
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
     name: 'Register',
     data: () => ({
@@ -78,7 +79,11 @@ export default {
             this.form.email != '' && this.form.password != '' && this.form.confirmPassword != ''
                 ? this.$refs.form.validate()
                 : (this.valid = false)
-        }
+        },
+
+        ...mapActions('Auth', {
+            register: 'REGISTER_USER'
+        })
     },
 
     mounted() {
