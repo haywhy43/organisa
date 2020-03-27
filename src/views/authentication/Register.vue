@@ -5,16 +5,29 @@
             <p class="sub_title">Create a new account</p>
 
             <v-form ref="form" v-model="valid" :lazy-validation="lazy">
-                <v-text-field v-model="first" label="E-mail" color="secondary" clearable></v-text-field>
-                <v-text-field v-model="first" label="Username" color="secondary" clearable></v-text-field>
-                <v-text-field v-model="first" label="Phone Number" color="secondary" clearable></v-text-field>
+                <v-text-field
+                    v-model="form.email"
+                    label="E-mail"
+                    color="secondary"
+                    type="email"
+                    :rules="emailRules"
+                ></v-text-field>
+                <v-text-field
+                    v-model="form.password"
+                    label="Password"
+                    color="secondary"
+                    type="password"
+                    :rules="passwordRules"
+                ></v-text-field>
+                <v-text-field
+                    v-model="form.confirmPassword"
+                    label="Confirm Password"
+                    color="secondary"
+                    type="password"
+                    :rules="confirmPasswordRules"
+                ></v-text-field>
 
-                <v-text-field v-model="first" label="Password" color="secondary"></v-text-field>
-                <v-text-field v-model="first" label="Confirm Password" color="secondary"></v-text-field>
-
-                <v-btn elevation="3" rounded @click="resetValidation">
-                    Proceed
-                </v-btn>
+                <v-btn elevation="3" rounded @click="validate" :disabled="!valid">Proceed</v-btn>
             </v-form>
             <div>
                 <p>Already a member? <router-link to="/login">Login</router-link></p>
@@ -25,7 +38,54 @@
 
 <script>
 export default {
-    name: 'Register'
+    name: 'Register',
+    data: () => ({
+        valid: true,
+        nameRules: [
+            (v) => !!v || 'Name is required',
+            (v) => (v && v.length <= 10) || 'Name must be less than 10 characters'
+        ],
+        emailRules: [(v) => !!v || 'E-mail is required', (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid'],
+        passwordRules: [
+            (v) => !!v || 'Password is required',
+            (v) => (v && v.length >= 6) || 'Password must be 6 or more characters',
+            (v) =>
+                // eslint-disable-next-line no-useless-escape
+                /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(v) ||
+                'Password must contain at lease one number and a special character'
+        ],
+        lazy: false,
+        form: {
+            email: '',
+            password: '',
+            confirmPassword: '',
+            name: '',
+            phoneNumber: ''
+        }
+    }),
+
+    computed: {
+        confirmPasswordRules() {
+            return [
+                (v) => !!v || 'Please confirm your password',
+                (v) => (v && v == this.form.password) || 'Passwords do not match'
+            ]
+        }
+    },
+
+    methods: {
+        validate() {
+            this.form.email != '' && this.form.password != '' && this.form.confirmPassword != ''
+                ? this.$refs.form.validate()
+                : (this.valid = false)
+        }
+    },
+
+    mounted() {
+        // eslint-disable-next-line no-useless-escape
+        console.log()
+        this.validate()
+    }
 }
 </script>
 
