@@ -10,6 +10,11 @@ Vue.config.productionTip = false
 
 firebase.initializeApp(config)
 
+firebase.auth().onAuthStateChanged((user) => {
+    console.log(user)
+    store.dispatch('Auth/FETCH_USER', user)
+})
+
 const NavLess = () => import('./layout/NavLess.vue')
 
 Vue.component('nav-less-layout', NavLess)

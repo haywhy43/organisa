@@ -6,15 +6,28 @@
 
             <v-form ref="form" v-model="valid" :lazy-validation="lazy">
                 <v-text-field
-                    v-model="first"
-                    label="E-mail | Name | Phone number"
+                    v-model="form.email"
+                    label="E-mail"
+                    type="email"
                     color="secondary"
-                    clearable
+                    :rules="emailRules"
                 ></v-text-field>
 
-                <v-text-field v-model="first" label="Password" color="secondary"></v-text-field>
+                <v-text-field
+                    v-model="form.password"
+                    type="password"
+                    label="Password"
+                    color="secondary"
+                    :rules="passwordRules"
+                ></v-text-field>
 
-                <v-btn elevation="3" rounded @click="resetValidation">
+                <v-btn
+                    elevation="3"
+                    rounded
+                    @click="() => login(form)"
+                    :disabled="!valid || loadingStatus"
+                    :loading="loadingStatus"
+                >
                     Proceed
                 </v-btn>
             </v-form>
@@ -26,8 +39,40 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
-    name: 'Login'
+    name: 'Login',
+    data() {
+        return {
+            valid: true,
+            emailRules: [(v) => !!v || 'E-mail is required'],
+            passwordRules: [(v) => !!v || 'Password is required'],
+            form: {
+                email: '',
+                password: ''
+            },
+            lazy: false
+        }
+    },
+    methods: {
+        validate() {
+            this.form.email != '' && this.form.password != '' ? this.$refs.form.validate() : (this.valid = false)
+        },
+
+        ...mapActions('Auth', {
+            login: 'AUTHENTICATE_USER'
+        })
+    },
+
+    computed: {
+        ...mapGetters('Auth', {
+            loadingStatus: 'LOADING_STATUS'
+        })
+    },
+    mounted() {
+        this.validate()
+        console.log(this.valid, this.loadingStatus)
+    }
 }
 </script>
 

@@ -24,6 +24,27 @@ const actions = {
                         })
                 }
             })
+    },
+
+    AUTHENTICATE_USER: ({ commit }, payload) => {
+        commit('SET_LOADING_STATUS', true)
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(payload.email, payload.password)
+            .then((res) => {
+                commit('SET_LOADING_STATUS', false)
+                commit('SET_USER', res.user)
+            })
+    },
+
+    FETCH_USER({ commit }, user) {
+        commit('SET_LOGGED_IN', user !== null)
+        console.log(user)
+        if (user) {
+            commit('SET_USER', user)
+        } else {
+            commit('SET_USER', null)
+        }
     }
 }
 
