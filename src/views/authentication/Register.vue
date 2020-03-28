@@ -6,6 +6,13 @@
 
             <v-form ref="form" v-model="valid" :lazy-validation="lazy">
                 <v-text-field
+                    v-model="form.name"
+                    label="Username"
+                    color="secondary"
+                    type="text"
+                    :rules="nameRules"
+                ></v-text-field>
+                <v-text-field
                     v-model="form.email"
                     label="E-mail"
                     color="secondary"
