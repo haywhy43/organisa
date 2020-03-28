@@ -34,7 +34,14 @@
                     :rules="confirmPasswordRules"
                 ></v-text-field>
 
-                <v-btn elevation="3" rounded @click="() => register(form)" :disabled="!valid">Proceed</v-btn>
+                <v-btn
+                    elevation="3"
+                    rounded
+                    @click="() => register(form)"
+                    :disabled="!valid || loadingStatus"
+                    :loading="loadingStatus"
+                    >Proceed</v-btn
+                >
             </v-form>
             <div>
                 <p>Already a member? <router-link to="/login">Login</router-link></p>
@@ -44,7 +51,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
     name: 'Register',
     data: () => ({
@@ -78,7 +85,11 @@ export default {
                 (v) => !!v || 'Please confirm your password',
                 (v) => (v && v == this.form.password) || 'Passwords do not match'
             ]
-        }
+        },
+
+        ...mapGetters('Auth', {
+            loadingStatus: 'LOADING_STATUS'
+        })
     },
 
     methods: {
@@ -94,8 +105,6 @@ export default {
     },
 
     mounted() {
-        // eslint-disable-next-line no-useless-escape
-        console.log()
         this.validate()
     }
 }

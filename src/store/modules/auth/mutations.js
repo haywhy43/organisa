@@ -1,6 +1,6 @@
 const mutations = {
-    SET_USER_LEVEL: (state, payload) => {
-        state.user_auth_state = payload
+    SET_LOADING_STATUS: (state, payload) => {
+        state.loading_status = payload
     }
 }
 

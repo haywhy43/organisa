@@ -5,6 +5,7 @@ require('firebase/firestore')
 
 const actions = {
     REGISTER_USER: ({ commit }, payload) => {
+        commit('SET_LOADING_STATUS', true)
         firebase
             .auth()
             .createUserWithEmailAndPassword(payload.email, payload.password)
@@ -16,7 +17,7 @@ const actions = {
                         })
                         .then((_res) => {
                             commit('SET_USER', firebase.auth().currentUser)
-                            commit('SET_USER_LEVEL', 1)
+                            commit('SET_LOADING_STATUS', false)
                         })
                         .catch((_err) => {
                             console.dir(_err)

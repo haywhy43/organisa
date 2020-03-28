@@ -4,7 +4,8 @@ import getters from './getters'
 
 const initialState = {
     user: '',
-    user_auth_state: 0
+    user_auth_state: 0,
+    loading_status: false
 }
 
 export default {
