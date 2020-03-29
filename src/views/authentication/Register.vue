@@ -91,7 +91,8 @@ export default {
 
         ...mapGetters('Auth', {
             loadingStatus: 'LOADING_STATUS',
-            errorMessage: 'ERROR_MESSAGE'
+            errorMessage: 'ERROR_MESSAGE',
+            user: 'USER'
         })
     },
 
@@ -107,7 +108,17 @@ export default {
         })
     },
 
+    watch: {
+        // eslint-disable-next-line no-unused-vars
+        user: function(newValue, oldValue) {
+            if (newValue != null) {
+                this.$router.push('/dashboard')
+            }
+        }
+    },
+
     mounted() {
+        this.user != null ? this.$router.push('/dashboard') : ''
         this.validate()
     }
 }
@@ -117,6 +128,4 @@ export default {
 .v-input {
     margin-top: 10px !important;
 }
-
-
 </style>
