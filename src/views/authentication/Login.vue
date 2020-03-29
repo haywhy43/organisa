@@ -15,7 +15,7 @@
 
                 <v-text-field
                     v-model="form.password"
-                    type="password"
+                    type="current-password"
                     label="Password"
                     color="secondary"
                     :rules="passwordRules"

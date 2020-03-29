@@ -107,16 +107,19 @@ export default {
 }
 
 @media screen and (max-width: 1200px) {
+    .inner_page {
+        width: 90% !important;
+    }
     .right {
         .v-card {
-            width: 80% !important;
+            width: 85% !important;
         }
     }
 }
 
 @media screen and (max-width: 900px) {
     .inner_page {
-        width: 90% !important;
+        width: 95% !important;
     }
     .right {
         .v-card {

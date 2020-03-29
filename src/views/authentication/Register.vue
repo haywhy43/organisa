@@ -23,14 +23,14 @@
                     v-model="form.password"
                     label="Password"
                     color="secondary"
-                    type="password"
+                    type="new-password"
                     :rules="passwordRules"
                 ></v-text-field>
                 <v-text-field
                     v-model="form.confirmPassword"
                     label="Confirm Password"
                     color="secondary"
-                    type="password"
+                    type="new-password"
                     :rules="confirmPasswordRules"
                 ></v-text-field>
 
