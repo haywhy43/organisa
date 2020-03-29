@@ -21,6 +21,8 @@
                     :rules="passwordRules"
                 ></v-text-field>
 
+                <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
+
                 <v-btn
                     elevation="3"
                     rounded
@@ -66,7 +68,8 @@ export default {
 
     computed: {
         ...mapGetters('Auth', {
-            loadingStatus: 'LOADING_STATUS'
+            loadingStatus: 'LOADING_STATUS',
+            errorMessage: 'ERROR_MESSAGE'
         })
     },
     mounted() {

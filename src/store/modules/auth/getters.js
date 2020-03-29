@@ -1,6 +1,7 @@
 const getters = {
-    user_level: (state) => state.user_auth_state,
-    LOADING_STATUS: (state) => state.loading_status
+    LOADING_STATUS: (state) => state.loading_status,
+    USER: (state) => state.user,
+    ERROR_MESSAGE: (state) => state.error_message
 }
 
 export default getters

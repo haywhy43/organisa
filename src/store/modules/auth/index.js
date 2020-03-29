@@ -3,10 +3,10 @@ import mutations from './mutations'
 import getters from './getters'
 
 const initialState = {
-    user: '',
-    user_auth_state: 0,
+    user: window.localStorage.getItem('user'),
     loading_status: false,
-    is_logged_in: false
+    is_logged_in: false,
+    error_message: ''
 }
 
 export default {

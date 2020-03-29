@@ -74,7 +74,7 @@ export default {
                     padding-bottom: 5px;
                 }
                 .sub_title {
-                    color: rgba(59, 1, 121, .5);
+                    color: rgba(59, 1, 121, 0.5);
                     font-size: 16px;
                 }
             }
@@ -100,7 +100,7 @@ export default {
 
         a {
             text-decoration: none;
-            color: rgba(59, 1, 121, .5) !important;
+            color: rgba(59, 1, 121, 0.5) !important;
             font-weight: 600;
         }
     }
@@ -158,5 +158,11 @@ export default {
             }
         }
     }
+}
+
+.error-message {
+    font-size: 14px;
+    color: red;
+    text-align: center;
 }
 </style>

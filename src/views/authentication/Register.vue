@@ -34,6 +34,8 @@
                     :rules="confirmPasswordRules"
                 ></v-text-field>
 
+                <p class="error-message">{{ errorMessage }}</p>
+
                 <v-btn
                     elevation="3"
                     rounded
@@ -88,7 +90,8 @@ export default {
         },
 
         ...mapGetters('Auth', {
-            loadingStatus: 'LOADING_STATUS'
+            loadingStatus: 'LOADING_STATUS',
+            errorMessage: 'ERROR_MESSAGE'
         })
     },
 
@@ -114,4 +117,6 @@ export default {
 .v-input {
     margin-top: 10px !important;
 }
+
+
 </style>

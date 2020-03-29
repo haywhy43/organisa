@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 require('firebase/auth')
-require('firebase/firestore')
 
 const actions = {
     REGISTER_USER: ({ commit }, payload) => {
         commit('SET_LOADING_STATUS', true)
+        commit('SET_ERROR_MESSAGE', '')
         firebase
             .auth()
             .createUserWithEmailAndPassword(payload.email, payload.password)
@@ -24,10 +24,15 @@ const actions = {
                         })
                 }
             })
+            .catch((err) => {
+                commit('SET_LOADING_STATUS', false)
+                commit('SET_ERROR_MESSAGE', err.message)
+            })
     },
 
     AUTHENTICATE_USER: ({ commit }, payload) => {
         commit('SET_LOADING_STATUS', true)
+        commit('SET_ERROR_MESSAGE', '')
         firebase
             .auth()
             .signInWithEmailAndPassword(payload.email, payload.password)
@@ -35,11 +40,14 @@ const actions = {
                 commit('SET_LOADING_STATUS', false)
                 commit('SET_USER', res.user)
             })
+            .catch((err) => {
+                commit('SET_LOADING_STATUS', false)
+                commit('SET_ERROR_MESSAGE', err.message)
+            })
     },
 
     FETCH_USER({ commit }, user) {
         commit('SET_LOGGED_IN', user !== null)
-        console.log(user)
         if (user) {
             commit('SET_USER', user)
         } else {
