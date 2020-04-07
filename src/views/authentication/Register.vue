@@ -112,13 +112,13 @@ export default {
         // eslint-disable-next-line no-unused-vars
         user: function(newValue, oldValue) {
             if (newValue != null) {
-                this.$router.push('/dashboard')
+                this.$router.push('/')
             }
         }
     },
 
     mounted() {
-        this.user != null ? this.$router.push('/dashboard') : ''
+        this.user != null ? this.$router.push('/') : ''
         this.validate()
     }
 }

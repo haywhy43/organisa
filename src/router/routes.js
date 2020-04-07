@@ -2,19 +2,19 @@ export default [
     {
         path: '/login',
         name: 'Login',
-        component: () => import('@/views/authentication')
+        component: () => import('@/views/authentication'),
     },
     {
         path: '/register',
         name: 'Register',
-        component: () => import('@/views/authentication')
+        component: () => import('@/views/authentication'),
     },
     {
-        path: '/dashboard',
+        path: '/',
         name: 'Dashboard',
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
         },
-        component: () => import('@/views/authentication')
-    }
+        component: () => import('@/views'),
+    },
 ]

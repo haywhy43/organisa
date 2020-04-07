@@ -15,12 +15,14 @@ firebase.auth().onAuthStateChanged((user) => {
 })
 
 const NavLess = () => import('./layout/NavLess.vue')
+const Authenticated = () => import('./layout/Authenticated.vue')
 
 Vue.component('nav-less-layout', NavLess)
+Vue.component('authenticated-layout', Authenticated)
 
 new Vue({
     router,
     store,
     vuetify,
-    render: (h) => h(App)
+    render: (h) => h(App),
 }).$mount('#app')
